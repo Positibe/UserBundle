@@ -1,0 +1,24 @@
+user:
+    breadcrumbs:
+        index: Usuarios
+        create: Nuevo usuario
+    create:
+        page_title: Crear usuario
+        page_subtitle: Nuevo usuario
+    update:
+        page_title: Usuario
+        page_subtitle: Editar usuario
+    form:
+        legend: Formulario del usuario
+    show:
+        page_title: Usuarios
+        avatar: Avatar
+        sign: Firma
+        roles: Permisos
+        profile: Perfil de usuario
+        change_password: Cambiar contraseña
+        edit: Editar perfil
+    list:
+        page_title: Usuarios
+        page_subtitle: Lista de usuarios
+        create_new: Crear nuevo usuario

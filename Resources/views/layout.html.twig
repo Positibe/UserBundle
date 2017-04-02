@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% set menu_active = 'configuration' %}
+{% set content_menu = null %}
+
+{% block navbar '' %}
+{% block main %}
+    {% block content %}
+        <div class="card" style="margin: 50px auto 50px">
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    <div class="card-block">
+        <h4 class="card-title">{{ 'layout.register' | trans({},'FOSUserBundle') }}</h4>
+        {{ form_widget(form) }}
+    </div>
+    <div class="card-footer text-right">
+        <div class="card-block">
+            <a href="{{ go_back('homepage') }}"
+               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> {{ 'action.back' | trans }}
+            </a>
+            <button type="submit"
+                    class="btn btn-sm btn-primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock fos_user_content %}

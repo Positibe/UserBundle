@@ -1,0 +1,17 @@
+sylius_resource:
+    resources:
+        positibe.user:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\User
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: Positibe\Bundle\CoreBundle\Repository\EntityRepository
+                form: Positibe\Bundle\UserBundle\Form\Type\UserFormType
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type: AppBundle\Form\Type\ProfileFormType

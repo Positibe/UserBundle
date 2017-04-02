@@ -1,0 +1,68 @@
+{% extends '@FOSUser/layout.html.twig' %}
+
+{% block fos_user_content %}
+    <form action="{{ path('fos_user_security_check') }}" class="login-form" method="post">
+        <div class="card-block">
+            <h4 class="card-title">Iniciar sesión</h4>
+
+            {% if error or app.session.flashbag.has('success') %}
+                <div class="alert alert-danger {{ error ?'': 'display-hide' }} ">
+                    <button class="close" data-close="alert"></button>
+                    <span>
+                        {% if error %}
+                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="flash-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </span>
+                </div>
+            {% endif %}
+            <div class="form-group md-form">
+                <i class="fa fa-envelope prefix"></i>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"
+                       class="form-control "
+                       autocomplete="off" autofocus="autofocus"/>
+                <label class="">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            </div>
+            <div class="form-group md-form">
+                <i class="fa fa-asterisk prefix"></i>
+                <input type="password" id="password" name="_password" required="required"
+                       class="form-control"
+                       autocomplete="off"/>
+                <label class="">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            </div>
+            <div class="form-group md-check">
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" id="remember_me" name="_remember_me" class="custom-control-input"
+                           value="on"/>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</span>
+                </label>
+            </div>
+
+            <a href="{{ path('fos_user_registration_register') }}"
+               name="back" class=""><i class="fa fa-"></i> {{ 'layout.register' | trans({}, 'FOSUserBundle') }}
+            </a>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+        </div>
+
+        <div class="card-footer text-right">
+            <div class="card-block">
+
+                <a href="{{ go_back('homepage') }}"
+                   name="back" class="btn btn-default btn-sm"><i
+                            class="fa fa-angle-left"></i> {{ 'action.back' | trans }}
+                </a>
+                <button type="submit"
+                        class="btn btn-sm btn-primary">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

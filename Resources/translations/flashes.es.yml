@@ -1,0 +1,5 @@
+positibe:
+    user:
+        create: El usuario se ha creado con éxito.
+        update: El usuario se ha actualizado con éxito.
+        delete: El usuario se ha eliminado con éxito.
