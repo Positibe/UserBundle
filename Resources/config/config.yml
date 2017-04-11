@@ -14,4 +14,12 @@ fos_user:
     user_class: AppBundle\Entity\User
     profile:
         form:
-            type: AppBundle\Form\Type\ProfileFormType
+            type: Positibe\Bundle\UserBundle\Form\Type\ProfileFormType
+
+ivory_ck_editor:
+    configs:
+        simple:
+            toolbar: basic
+            filebrowserUploadRoute: "positibe_media_upload"
+            filebrowserBrowseRoute: "elfinder"
+            contentsCss: "css/compiled/main.css"

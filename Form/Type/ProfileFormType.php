@@ -32,7 +32,7 @@ class ProfileFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'Nombre(s) y apellidos:'])
-            ->add('sign', CKEditorType::class, ['label' => 'Firma:'])
+            ->add('sign', CKEditorType::class, ['label' => 'Firma:', 'config_name' => 'simple'])
             ->add('avatar', ImageType::class, array('label' => 'Avatar:'));
     }
 

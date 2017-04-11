@@ -30,7 +30,7 @@ trait UserTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="sign", type="string", length=255, nullable=TRUE)
+     * @ORM\Column(name="sign", type="text", nullable=TRUE)
      */
     protected $sign;
     /**

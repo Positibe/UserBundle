@@ -3,7 +3,11 @@
 {% set menu_active = 'configuration' %}
 {% set content_menu = null %}
 
-{% block navbar '' %}
+{% block stylesheets %}
+    <link href="{{ asset('bundles/positibemedia/jquery-file-upload/css/file-upload.all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/positibemedia/css/media.css') }}" rel="stylesheet">
+{% endblock %}
+{% block nav_image '' %}
 {% block main %}
     {% block content %}
         <div class="card" style="margin: 50px auto 50px">

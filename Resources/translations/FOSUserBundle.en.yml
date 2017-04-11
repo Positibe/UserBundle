@@ -1,0 +1,4 @@
+layout:
+    login: Sign in
+    register: Sign up
+    logout: Sign out

@@ -9,7 +9,7 @@ user:
         page_title: Usuario
         page_subtitle: Editar usuario
     form:
-        legend: Formulario del usuario
+        legend: Formulario
     show:
         page_title: Usuarios
         avatar: Avatar
