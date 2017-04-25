@@ -6,14 +6,10 @@
 namespace Positibe\Bundle\UserBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Positibe\Bundle\MediaBundle\Form\Type\GalleryType;
 use Positibe\Bundle\MediaBundle\Form\Type\ImageType;
-use Positibe\Bundle\MediaBundle\Form\Type\MediaCollectionType;
-use Positibe\Bundle\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +19,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserFormType extends AbstractType
 {
+    protected $roles = [];
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -42,9 +56,7 @@ class UserFormType extends AbstractType
                 'roles',
                 ChoiceType::class,
                 [
-                    'choices' => [
-                        'Administrador' => 'ROLE_ADMIN',
-                    ],
+                    'choices' => array_combine($this->roles, $this->roles),
                     'multiple' => true,
                     'expanded' => true,
                     'label' => 'Permisos especiales:',

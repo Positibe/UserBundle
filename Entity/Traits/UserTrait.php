@@ -40,6 +40,11 @@ trait UserTrait
      */
     protected $avatar;
 
+    public function __toString()
+    {
+        return $this->name ?: $this->username;
+    }
+
     /**
      * @return Media
      */

@@ -24,5 +24,10 @@ class PositibeUserExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->getDefinition('positibe_user.user.form')->addMethodCall(
+            'setRoles',
+            [array_merge($config['roles'], ['ROLE_ADMIN' => 'ROLE_ADMIN'])]
+        );
     }
 }

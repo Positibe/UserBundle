@@ -1,3 +1,4 @@
+ROLE_ADMIN: Administrador
 user:
     breadcrumbs:
         index: Usuarios

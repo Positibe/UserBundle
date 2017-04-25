@@ -2,3 +2,7 @@ services:
 #    positibe_user.example:
 #        class: Positibe\Bundle\UserBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    positibe_user.user.form:
+        class: Positibe\Bundle\UserBundle\Form\Type\UserFormType
+        tags:
+            - { name: form.type }
