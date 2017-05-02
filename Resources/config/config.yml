@@ -15,6 +15,12 @@ fos_user:
         sender_name: "%mailer_user%"
     firewall_name: main
     user_class: AppBundle\Entity\User
+    from_email:
+        address:        "%sender_address%"
+        sender_name:    "%sender_name%"
+    registration:
+        confirmation:
+            enabled: true
     profile:
         form:
             type: Positibe\Bundle\UserBundle\Form\Type\ProfileFormType

@@ -3,6 +3,13 @@
 {% set icon = 'fa fa-users' %}
 
 {% embed '@PositibeCore/Grid/show.html.twig' %}
+    {% block actions %}
+        <a href="{{ path('homepage', { '_switch_user': user.username }) }}"
+           class="btn btn-primary btn-sm">
+            <i class="fa fa-user-secret"></i> Suplantar
+        </a>
+        {{ parent() }}
+    {% endblock %}
     {% block content_body %}
         <div class="row">
             <div class="col-3">

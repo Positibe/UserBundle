@@ -11,6 +11,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -51,6 +53,7 @@ class UserFormType extends AbstractType
             ->add('email', null, ['label' => 'Correo:'])
             ->add('name', null, ['label' => 'Nombre(s) y apellidos:'])
             ->add('sign', CKEditorType::class, ['label' => 'Firma:'])
+            ->add('url', null, ['label' => 'Sitio web:'])
             ->add('avatar', ImageType::class, array('label' => 'Avatar:'))
             ->add(
                 'roles',
@@ -64,6 +67,15 @@ class UserFormType extends AbstractType
             )
             ->add('plain_password', PasswordType::class, ['label' => 'Nueva contraseña:', 'required' => false])
             ->add('enabled', null, ['label' => 'Usuario habilitado', 'data' => true, 'required' => false]);
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                if ($event->getForm()->get('plain_password')->getData()) {
+                    $event->getData()->setPassword(null);
+                }
+            }
+        );
     }
 
     /**
@@ -73,7 +85,7 @@ class UserFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\UserBundle\Entity\User',
+                'data_class' => 'AppBundle\Entity\User',
             )
         );
     }

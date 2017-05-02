@@ -34,6 +34,12 @@ trait UserTrait
      */
     protected $sign;
     /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255, nullable=TRUE)
+     */
+    protected $url;
+    /**
      * @var Media
      *
      * @ORM\ManyToOne(targetEntity="Positibe\Bundle\MediaBundle\Entity\Media", cascade={"persist", "remove"})
@@ -91,5 +97,21 @@ trait UserTrait
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 }

@@ -23,12 +23,12 @@
                     </span>
                 </div>
             {% endif %}
-            <div class="form-group md-form">
-                <i class="fa fa-envelope prefix"></i>
+            <div class="form-group md-form ">
+                <i class="fa fa-envelope prefix active"></i>
                 <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"
                        class="form-control "
-                       autocomplete="off" autofocus="autofocus"/>
-                <label class="">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                       autocomplete="off"/>
+                <label class="active">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
             </div>
             <div class="form-group md-form">
                 <i class="fa fa-asterisk prefix"></i>

@@ -3,12 +3,12 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       [ROLE_USER, ROLE_EDITOR, ROLE_MODERATOR, ROLE_AUTHOR] #By Default All Positibe Roles
+        ROLE_ADMIN:       [ROLE_ALLOWED_TO_SWITCH, ROLE_USER, ROLE_EDITOR, ROLE_MODERATOR, ROLE_AUTHOR] #By Default All Positibe Roles
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         main:
@@ -21,3 +21,4 @@ security:
 
             logout:       true
             anonymous:    true
+            switch_user:  true
