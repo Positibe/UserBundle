@@ -1,3 +1,6 @@
+parameters:
+    positibe_user_form_class: Positibe\Bundle\UserBundle\Form\Type\UserFormType
+
 sylius_resource:
     resources:
         positibe.user:
@@ -6,7 +9,7 @@ sylius_resource:
                 model: AppBundle\Entity\User
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: Positibe\Bundle\CoreBundle\Repository\EntityRepository
-                form: Positibe\Bundle\UserBundle\Form\Type\UserFormType
+                form: "%positibe_user_form_class%"
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
