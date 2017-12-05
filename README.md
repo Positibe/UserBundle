@@ -46,3 +46,40 @@ There are some abstraction for secutiry configuration:
             - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/, role: ROLE_ADMIN }
+            
+You have to implement your own User class:
+
+    <?php
+    
+    namespace AppBundle\Entity;
+    
+    use Doctrine\Common\Collections\ArrayCollection;
+    use FOS\UserBundle\Model\User as BaseUser;
+    use Doctrine\ORM\Mapping as ORM;
+    use Positibe\Bundle\UserBundle\Entity\Traits\UserTrait;
+    use Positibe\Bundle\UserBundle\Entity\UserInterface;
+    use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+    
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="app_user")
+     *
+     * @UniqueEntity({"username"})
+     * @UniqueEntity({"email"})
+     */
+    class User extends BaseUser implements UserInterface
+    {
+        use UserTrait;
+    
+        /**
+         * @ORM\Id
+         * @ORM\Column(type="integer")
+         * @ORM\GeneratedValue(strategy="AUTO")
+         */
+        protected $id;
+    
+        public function __construct()
+        {
+            parent::__construct();
+        }
+    }
