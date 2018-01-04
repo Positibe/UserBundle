@@ -1,16 +1,6 @@
 parameters:
     positibe_user_form_class: Positibe\Bundle\UserBundle\Form\Type\UserFormType
 
-sylius_resource:
-    resources:
-        positibe.user:
-            driver: doctrine/orm
-            classes:
-                model: AppBundle\Entity\User
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: Positibe\Bundle\CoreBundle\Repository\EntityRepository
-                form: "%positibe_user_form_class%"
-
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     from_email:
@@ -27,11 +17,3 @@ fos_user:
     profile:
         form:
             type: Positibe\Bundle\UserBundle\Form\Type\ProfileFormType
-
-ivory_ck_editor:
-    configs:
-        simple:
-            toolbar: basic
-            filebrowserUploadRoute: "positibe_media_upload"
-            filebrowserBrowseRoute: "elfinder"
-            contentsCss: "css/compiled/main.css"

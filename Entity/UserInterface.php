@@ -11,7 +11,6 @@
 namespace Positibe\Bundle\UserBundle\Entity;
 
 use Positibe\Bundle\MediaBundle\Entity\Media;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 
 /**
@@ -20,7 +19,7 @@ use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-interface UserInterface extends ResourceInterface, FOSUserInterface
+interface UserInterface extends FOSUserInterface
 {
     /** @return Media */
     public function getAvatar();

@@ -1,6 +1,0 @@
-app_user:
-    resource: |
-        alias: positibe.user
-        templates: PositibeUserBundle:User
-        redirect: update
-    type: sylius.resource

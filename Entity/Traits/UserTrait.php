@@ -10,8 +10,6 @@
 
 namespace Positibe\Bundle\UserBundle\Entity\Traits;
 
-use Positibe\Bundle\MediaBundle\Entity\Media;
-
 /**
  * Class UserTrait
  * @package Positibe\Bundle\UserBundle\Entity\Traits
@@ -20,6 +18,8 @@ use Positibe\Bundle\MediaBundle\Entity\Media;
  */
 trait UserTrait
 {
+    protected $username;
+
     /**
      * @var string
      *
@@ -40,9 +40,9 @@ trait UserTrait
      */
     protected $url;
     /**
-     * @var Media
+     * @var Object
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     *
      */
     protected $avatar;
 
@@ -52,7 +52,7 @@ trait UserTrait
     }
 
     /**
-     * @return Media
+     * @return Object
      */
     public function getAvatar()
     {
@@ -60,7 +60,7 @@ trait UserTrait
     }
 
     /**
-     * @param Media $avatar
+     * @param Object $avatar
      */
     public function setAvatar($avatar)
     {

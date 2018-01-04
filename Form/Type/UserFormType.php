@@ -5,11 +5,10 @@
 
 namespace Positibe\Bundle\UserBundle\Form\Type;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Positibe\Bundle\MediaBundle\Form\Type\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -52,9 +51,9 @@ class UserFormType extends AbstractType
             )
             ->add('email', null, ['label' => 'Correo:'])
             ->add('name', null, ['label' => 'Nombre(s) y apellidos:'])
-            ->add('sign', CKEditorType::class, ['label' => 'Firma:'])
+            ->add('sign', TextareaType::class, ['label' => 'Firma:'])
             ->add('url', null, ['label' => 'Sitio web:'])
-            ->add('avatar', ImageType::class, array('label' => 'Avatar:'))
+//            ->add('avatar', ImageType::class, array('label' => 'Avatar:'))
             ->add(
                 'roles',
                 ChoiceType::class,
@@ -85,16 +84,8 @@ class UserFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'AppBundle\Entity\User',
+                'data_class' => class_exists('App\Entity\User') ? 'App\Entity\User' ? 'AppBundle\Entity\User',
             )
         );
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'app_user';
     }
 }
