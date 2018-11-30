@@ -2,10 +2,10 @@
 
 namespace Positibe\Bundle\UserBundle\DependencyInjection;
 
+use Positibe\Bundle\UserBundle\Form\Type\ProfileFormType;
 use Positibe\Bundle\UserBundle\Form\Type\UserFormType;
-use Symfony\Component\Config\FileLocator;
+use Positibe\Bundle\UserBundle\Mailer\PositibeStandardMailer;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -23,8 +23,8 @@ class PositibeUserExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $container->autowire(UserFormType::class)->setPublic(false);
+        $container->autowire(ProfileFormType::class)->setPublic(false);
 
         $container->getDefinition(UserFormType::class)->addMethodCall(
             'setRoles',
@@ -32,9 +32,7 @@ class PositibeUserExtension extends Extension
         );
 
         if (isset($container->getParameter('kernel.bundles')['PositibeMailingBundle'])) {
-            $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-            $loader->load('mailer.yml');
+            $container->autowire(PositibeStandardMailer::class)->setPublic(true);
         }
     }
 }

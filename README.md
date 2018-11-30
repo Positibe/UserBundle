@@ -27,39 +27,73 @@ Next, be sure to enable the bundles in your application kernel:
 Configuration
 -------------
 
-Import all necessary configurations to your app/config/config.yml the basic configuration.
-    # app/config/config.yml
-    imports:
-        - { resource: '@PositibeUserBundle/Resources/config/config.yml'}
+Copy the default configuration into the new `fos_user.yaml` file in your configuration packages:
 
-There are some abstraction for secutiry configuration:
+    [yaml]
+    fos_user:
+        db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+        firewall_name: main
+        user_class: App\Entity\User
+        from_email:
+            address: "%env(MAIL_ADDRESS)%"
+            sender_name: "%env(MAIL_SENDER_NAME)%"
+    
+    #    registration:
+    #        confirmation:
+    #            enabled: true
+    #    profile:
+    #        form:
+    #            type: Positibe\Bundle\UserBundle\Form\Type\ProfileFormType
 
-    # app/config/security.yml
-    imports:
-    - { resource: '@PositibeUserBundle/Resources/config/security.yml'}
+And security configuration into your `security.yaml` config file:
 
+    [yaml]
+    parameters:
+        security.lifetime: 604800 #7 días/1 semana
+    
     security:
+        encoders:
+            FOS\UserBundle\Model\UserInterface: bcrypt
+    
         role_hierarchy:
-            ROLE_ADMIN:       [ROLE_ALLOWED_TO_SWITCH, ROLE_USER]
-            ROLES_SUPER_ADMIN: [ROLE_ADMIN]
-            
+            ROLE_ADMIN:       [ROLE_ALLOWED_TO_SWITCH, ROLE_USER, ROLE_EDITOR, ROLE_MODERATOR, ROLE_AUTHOR] #By Default All Positibe Roles
+            ROLE_SUPER_ADMIN: ROLE_ADMIN
+    
+        providers:
+            fos_userbundle:
+                id: fos_user.user_provider.username_email
+    
+        firewalls:
+            main:
+                pattern: ^/
+                form_login:
+                    provider: fos_userbundle
+                    csrf_token_generator: security.csrf.token_manager
+                    login_path: /security/login
+                    check_path: /security/login_check
+                logout:
+                    path: /security/logout
+                anonymous:    true
+                switch_user:  true
+                remember_me:
+                    lifetime: "%security.lifetime%"
+                    secret: "%kernel.secret%"
         access_control:
-            - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-            - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-            - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/security/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/security/logout, role: ROLE_USER }
+            - { path: ^/security/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/security/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/, role: ROLE_ADMIN }
             
 You have to implement your own User class:
 
     <?php
     
-    namespace AppBundle\Entity;
+    namespace App\Entity;
     
-    use Doctrine\Common\Collections\ArrayCollection;
     use FOS\UserBundle\Model\User as BaseUser;
     use Doctrine\ORM\Mapping as ORM;
     use Positibe\Bundle\UserBundle\Entity\Traits\UserTrait;
-    use Positibe\Bundle\UserBundle\Entity\UserInterface;
     use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     
     /**
@@ -69,7 +103,7 @@ You have to implement your own User class:
      * @UniqueEntity({"username"})
      * @UniqueEntity({"email"})
      */
-    class User extends BaseUser implements UserInterface
+    class User extends BaseUser
     {
         use UserTrait;
     
@@ -85,3 +119,10 @@ You have to implement your own User class:
             parent::__construct();
         }
     }
+    
+Routes
+------
+
+Import your routes
+
+

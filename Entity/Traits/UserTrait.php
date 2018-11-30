@@ -44,6 +44,26 @@ trait UserTrait
         return $this->name ?: $this->username;
     }
 
+    public function addRole($role)
+    {
+        if ($role === 'ROLE_SUPER_ADMIN') {
+            $this->isSuperAdmin = true;
+        }
+
+        parent::addRole($role);
+    }
+
+    public function getRoles()
+    {
+        $roles = parent::getRoles();
+        if ($this->isSuperAdmin) {
+            $roles[] = 'ROLE_SUPER_ADMIN';
+        }
+
+        return $roles;
+    }
+
+
     /**
      * @return Object
      */
@@ -92,10 +112,4 @@ trait UserTrait
         $this->isSuperAdmin = $isSuperAdmin;
     }
 
-    public function addRole($role)
-    {
-        if ($role === 'ROLE_SUPER_ADMIN') {
-            $this->isSuperAdmin = true;
-        }
-    }
 }
