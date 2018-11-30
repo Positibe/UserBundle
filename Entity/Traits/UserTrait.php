@@ -19,6 +19,7 @@ namespace Positibe\Bundle\UserBundle\Entity\Traits;
 trait UserTrait
 {
     protected $username;
+    protected $roles;
 
     /**
      * @var string
@@ -26,23 +27,15 @@ trait UserTrait
      * @ORM\Column(name="name", type="string", length=255, nullable=TRUE)
      */
     protected $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_super_admin", type="boolean", nullable=TRUE)
+     */
+    protected $isSuperAdmin;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="sign", type="text", nullable=TRUE)
-     */
-    protected $sign;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255, nullable=TRUE)
-     */
-    protected $url;
-    /**
      * @var Object
-     *
-     *
      */
     protected $avatar;
 
@@ -70,22 +63,6 @@ trait UserTrait
     /**
      * @return string
      */
-    public function getSign()
-    {
-        return $this->sign;
-    }
-
-    /**
-     * @param string $sign
-     */
-    public function setSign($sign)
-    {
-        $this->sign = $sign;
-    }
-
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
@@ -102,16 +79,23 @@ trait UserTrait
     /**
      * @return string
      */
-    public function getUrl()
+    public function isSuperAdmin()
     {
-        return $this->url;
+        return $this->isSuperAdmin;
     }
 
     /**
-     * @param string $url
+     * @param string $isSuperAdmin
      */
-    public function setUrl($url)
+    public function setIsSuperAdmin($isSuperAdmin)
     {
-        $this->url = $url;
+        $this->isSuperAdmin = $isSuperAdmin;
+    }
+
+    public function addRole($role)
+    {
+        if ($role === 'ROLE_SUPER_ADMIN') {
+            $this->isSuperAdmin = true;
+        }
     }
 }

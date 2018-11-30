@@ -40,7 +40,9 @@ There are some abstraction for secutiry configuration:
 
     security:
         role_hierarchy:
-
+            ROLE_ADMIN:       [ROLE_ALLOWED_TO_SWITCH, ROLE_USER]
+            ROLES_SUPER_ADMIN: [ROLE_ADMIN]
+            
         access_control:
             - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

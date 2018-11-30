@@ -10,7 +10,7 @@
     ],
     "homepage": "http://positibelabs.com/bundles/user",
     "license": "MIT",
-    "version": "1.1.0-RC1",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "^3.0 || ^4.0",
+        "symfony/framework-bundle": "^3.4 || ^4.0",
         "friendsofsymfony/user-bundle": "^2.0"
     },
     "autoload": {

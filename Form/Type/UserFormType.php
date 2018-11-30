@@ -51,9 +51,6 @@ class UserFormType extends AbstractType
             )
             ->add('email', null, ['label' => 'Correo:'])
             ->add('name', null, ['label' => 'Nombre(s) y apellidos:'])
-            ->add('sign', TextareaType::class, ['label' => 'Firma:'])
-            ->add('url', null, ['label' => 'Sitio web:'])
-//            ->add('avatar', ImageType::class, array('label' => 'Avatar:'))
             ->add(
                 'roles',
                 ChoiceType::class,
@@ -80,11 +77,11 @@ class UserFormType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => class_exists('App\Entity\User') ? 'App\Entity\User' ? 'AppBundle\Entity\User',
+                'data_class' => class_exists('App\Entity\User') ? 'App\Entity\User' : 'AppBundle\Entity\User'
             )
         );
     }

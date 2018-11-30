@@ -1,0 +1,3 @@
+services:
+    Positibe\Bundle\UserBundle\Mailer\PositibeStandardMailer:
+        arguments: ["@router","@positibe_mailing.sender.standard"]

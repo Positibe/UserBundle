@@ -11,7 +11,6 @@
 namespace Positibe\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\ProfileFormType as FOSProfileFormType;
@@ -30,9 +29,7 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Nombre(s) y apellidos:'])
-            ->add('sign', TextareaType::class, ['label' => 'Firma:', 'config_name' => 'simple'])
-//            ->add('avatar', ImageType::class, array('label' => 'Avatar:'));
+            ->add('name', TextType::class, ['label' => 'Nombre(s) y apellidos:']);
     }
 
     /**

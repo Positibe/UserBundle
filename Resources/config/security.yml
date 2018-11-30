@@ -1,3 +1,5 @@
+parameters:
+    security.lifetime: 604800 #7 días/1 semana
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
@@ -24,3 +26,6 @@ security:
                 path: /security/logout
             anonymous:    true
             switch_user:  true
+            remember_me:
+                lifetime: "%security.lifetime%"
+                secret: "%kernel.secret%"

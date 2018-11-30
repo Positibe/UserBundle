@@ -3,7 +3,9 @@
 namespace Positibe\Bundle\UserBundle\DependencyInjection;
 
 use Positibe\Bundle\UserBundle\Form\Type\UserFormType;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -21,9 +23,18 @@ class PositibeUserExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+
         $container->getDefinition(UserFormType::class)->addMethodCall(
             'setRoles',
             [array_merge($config['roles'], ['ROLE_ADMIN' => 'ROLE_ADMIN'])]
         );
+
+        if ($container->getParameter('kernel.bundles')['PositibeMailingBundle']) {
+            $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+            $loader->load('mailer.yml');
+        }
     }
 }
