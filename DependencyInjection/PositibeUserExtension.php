@@ -31,7 +31,7 @@ class PositibeUserExtension extends Extension
             [array_merge($config['roles'], ['ROLE_ADMIN' => 'ROLE_ADMIN'])]
         );
 
-        if ($container->getParameter('kernel.bundles')['PositibeMailingBundle']) {
+        if (isset($container->getParameter('kernel.bundles')['PositibeMailingBundle'])) {
             $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
             $loader->load('mailer.yml');
